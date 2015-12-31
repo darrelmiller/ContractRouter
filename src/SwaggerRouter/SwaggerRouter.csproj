@@ -56,11 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser\JsonConsumer.cs" />
     <Compile Include="Parser\Context.cs" />
     <Compile Include="Parser\Vocabulary.cs" />
-    <Compile Include="SwaggerDocument.cs" />
-    <Compile Include="SwaggerJsonConsumer.cs" />
+    <Compile Include="Parser\SwaggerDocument.cs" />
     <Compile Include="Parser\JsonStreamingParser.cs" />
     <Compile Include="SwaggerRouter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

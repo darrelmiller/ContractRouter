@@ -12,8 +12,10 @@ namespace SampleApi
         {
             // Web API configuration and services
 
-            var stream = new MemoryStream();
-            //read swagger stream
+            var stream = typeof(WebApiConfig).Assembly
+               .GetManifestResourceStream("SampleApi.swagger.json");
+
+            // read swagger stream
             // Web API routes
 
             config.Routes.Add("SwaggerRouter", new SwaggerRouter.SwaggerRouter(stream));

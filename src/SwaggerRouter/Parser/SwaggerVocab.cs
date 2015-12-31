@@ -57,16 +57,10 @@ namespace SwaggerRouter
                     Term = "_operation"
                 };
             });
-            vocab.AddTermHandler("description", (c, o) =>
-            {
-                var descProp = c.Subject.GetType().GetProperty("Description");
-                if (descProp != null)
-                {
-                    descProp.SetValue(c.Subject, o);
-                }
-                return null;
-            });
+
+            vocab.AddSimpleStringTermHandler("description", "Description");
             vocab.AddSimpleStringTermHandler("title", "Title");
+            vocab.AddSimpleStringTermHandler("operationId", "Id");
             return vocab;
         }
     }

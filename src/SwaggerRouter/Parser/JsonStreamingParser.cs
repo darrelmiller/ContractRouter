@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace SwaggerRouter
 {
+    
+
     public class JsonStreamingParser
     {
         public static DiagnosticSource DiagSource {
@@ -84,64 +86,6 @@ namespace SwaggerRouter
             }
         }
 
-
-
-
-
-        public static void ParseStream(Stream stream, IJsonConsumer consumer)
-        {
-            var reader = new JsonTextReader(new StreamReader(stream));
-            var ostack = new Stack<ParseContextObject>();
-            ParseContextObject currentContext = null;
-            string currentProperty = "";
-            bool inArray = false;
-            while (reader.Read())
-            {
-                switch (reader.TokenType)
-                {
-                    case JsonToken.StartObject:
-                        if (!inArray) ostack.Push(currentContext);
-                        currentContext = new ParseContextObject()
-                        {
-                            ContextObject = consumer.CreateObject(currentContext, currentProperty),
-                            PropertyName = currentProperty,
-                            ParseMap = consumer.GetParseMap(currentContext, currentProperty)
-                        };
-
-                        break;
-                    case JsonToken.StartArray:
-                        inArray = true;
-                        break;
-                    case JsonToken.EndArray:
-                        inArray = false;
-                        break;
-                    case JsonToken.EndObject:
-                        if (ostack.Count > 0)
-                        {
-                            currentContext = ostack.Pop();
-                        }
-                        break;
-
-                    case JsonToken.PropertyName:
-                        currentProperty = reader.Value.ToString();
-                        break;
-                    case JsonToken.Integer:
-                    case JsonToken.Boolean:
-                    case JsonToken.String:
-
-                        var parser = currentContext.ParseMap.GetParser(currentProperty);
-                        if (parser != null)
-                        {
-                            parser(reader.Value, currentContext.ContextObject);
-                        }
-                        else if (currentContext.ParseMap.DefaultParse != null)
-                        {
-                            currentContext.ParseMap.DefaultParse(currentProperty, reader.Value, currentContext.ContextObject);
-                        }
-                        break;
-                }
-            }
-        }
 
     }
 

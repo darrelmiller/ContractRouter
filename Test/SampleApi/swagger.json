@@ -1,0 +1,29 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Sample API",
+    "description": "",
+    "version": "1.0"
+  },
+  "host": "api.example.org",
+  "basePath": "",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Get home discovery doc",
+        "operationId": "home",
+        "responses": { }
+      }
+    },
+    "/resource": {
+      "get": {
+        "description": "Simple single resource",
+        "operationId": "resource",
+        "responses": { }
+      }
+    }
+  }
+}

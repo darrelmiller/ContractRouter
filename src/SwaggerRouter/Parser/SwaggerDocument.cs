@@ -9,7 +9,7 @@ namespace SwaggerRouter
 {
     
 
-    public class SwaggerDocument : IJsonConsumer
+    public class SwaggerDocument 
     {
         public string Version { get; set; }
         public Dictionary<string,Path> Paths { get; set; }
@@ -50,15 +50,6 @@ namespace SwaggerRouter
             return new JObject(new JProperty("operationId", op.Id));
         }
 
-        public ParseMap GetParseMap(ParseContextObject contextObject, string objectName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object CreateObject(ParseContextObject contextObject, string objectName)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class Info

@@ -55,8 +55,8 @@ namespace SwaggerRouterTests
                                                         ))
                                       );
 
-
-            JsonStreamingParser.ParseStream(jObject.ToMemoryStream(), new ConsoleSwaggerJsonConsumer(_Output));
+            var doc = new SwaggerDocument();
+            JsonStreamingParser.ParseStream(jObject.ToMemoryStream(), doc,SwaggerVocab.Create());
 
         }
 
@@ -83,7 +83,8 @@ namespace SwaggerRouterTests
 
             _Output.WriteLine(swaggerstring);
 
-            JsonStreamingParser.ParseStream(swaggerstring.ToMemoryStream(), new ConsoleSwaggerJsonConsumer(_Output));
+            var newDoc = new SwaggerDocument();
+            JsonStreamingParser.ParseStream(swaggerstring.ToMemoryStream(), newDoc,SwaggerVocab.Create());
 
         }
 
@@ -94,7 +95,7 @@ namespace SwaggerRouterTests
 
            var stream = typeof(SwaggerParsingTests).Assembly.GetManifestResourceStream("SwaggerRouterTests.forecast.io.swagger.json");
 
-            JsonStreamingParser.ParseStream(stream, new ConsoleSwaggerJsonConsumer(_Output));
+            JsonStreamingParser.ParseStream(stream, new SwaggerDocument(),SwaggerVocab.Create());
 
         }
 

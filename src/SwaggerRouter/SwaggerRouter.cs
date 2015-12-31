@@ -11,21 +11,11 @@ namespace SwaggerRouter
 {
     public class SwaggerRouter : IHttpRoute
     {
+        private SwaggerDocument swaggerDoc;
         public SwaggerRouter(Stream swaggerStream)
         {
-            var reader = new JsonTextReader(new StreamReader(swaggerStream));
-            
-            while (reader.Read()) {
-                switch (reader.TokenType)
-                {
-                    case JsonToken.StartObject:
-                        break;
-                    case JsonToken.StartConstructor:
-                        break;
-                } 
-
-                
-            }
+            swaggerDoc = new SwaggerDocument();
+            JsonStreamingParser.ParseStream(swaggerStream, swaggerDoc, SwaggerVocab.Create());
         }
         public IDictionary<string, object> Constraints
         {
@@ -44,8 +34,17 @@ namespace SwaggerRouter
 
         public IHttpRouteData GetRouteData(string virtualPathRoot, System.Net.Http.HttpRequestMessage request)
         {
-            return new HttpRouteData(this) { 
-            };
+            var routeData = new HttpRouteData(this);
+
+            Path path = null;
+            var requestPath = request.RequestUri.GetComponents(UriComponents.Path, UriFormat.Unescaped);
+            if (!swaggerDoc.Paths.TryGetValue("/"+requestPath, out path)) {
+                return routeData;
+            }
+            
+            routeData.Values.Add("controller", path.Operations[request.Method.ToString().ToLower()].Id);
+
+            return routeData;
         }
 
         public IHttpVirtualPathData GetVirtualPath(System.Net.Http.HttpRequestMessage request, IDictionary<string, object> values)
