@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwaggerRouter", "src\SwaggerRouter\SwaggerRouter.csproj", "{A353C582-6E06-4B8C-9B71-4B3284964DED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApi", "Test\SampleApi\SampleApi.csproj", "{769CE5DB-9991-47D6-B8B4-3F5B33BE664E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwaggerRouterTests", "test\SwaggerRouterTests\SwaggerRouterTests.csproj", "{A3D75D4A-3229-4387-8D2B-D0E2E7598191}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A353C582-6E06-4B8C-9B71-4B3284964DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A353C582-6E06-4B8C-9B71-4B3284964DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A353C582-6E06-4B8C-9B71-4B3284964DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A353C582-6E06-4B8C-9B71-4B3284964DED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{769CE5DB-9991-47D6-B8B4-3F5B33BE664E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{769CE5DB-9991-47D6-B8B4-3F5B33BE664E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{769CE5DB-9991-47D6-B8B4-3F5B33BE664E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{769CE5DB-9991-47D6-B8B4-3F5B33BE664E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3D75D4A-3229-4387-8D2B-D0E2E7598191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3D75D4A-3229-4387-8D2B-D0E2E7598191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3D75D4A-3229-4387-8D2B-D0E2E7598191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3D75D4A-3229-4387-8D2B-D0E2E7598191}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
