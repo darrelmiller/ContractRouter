@@ -1,8 +1,8 @@
 #Open API Router
 
-Existing efforts to use the Open API format (fka Swagger) in ASP.NET Web API used the library Swashbuckle to generate a swagger document based on the information made available via the ApiExplorer.  Unfortunately due to the various routing mechanisms available in ASP.NET Web API there meta data in API Explorer does not always accurately represent the available resources and the opinions of the Open API specification prevent certain resource URLs from being accurately described.
+Existing efforts to use the Open API format (fka Swagger) in ASP.NET Web API used the library Swashbuckle to generate a Swagger document based on the information made available via the ApiExplorer. Unfortunately due to the various routing mechanisms available in ASP.NET Web API the meta data in API Explorer does not always accurately represent the available resources.  Also, the opinions of the Open API specification prevent certain resource URLs from being accurately described.
 
-This library takes a different approach to using the Open API format.  The API description document becomes a primary artifact of the implementation and is edited to describe the API.  A new vendor extension property `x-controller` can be used to identify which Web API controllers will be used to handle requests.  A new routing mechanism is provided to map incoming requests to controllers based on this augmented Open API description document.
+This library takes a different approach to using the Open API format. The API description document becomes a primary artifact of the implementation and is edited to describe the API.  A new vendor extension property `x-controller` can be used to identify which Web API controllers will be used to handle requests.  A new routing mechanism is provided to map incoming requests to controllers based on this augmented Open API description document.
 
 The benefit of this approach is that Open API document is always an accurate description of the API.  There is never a mismatch between the Web API routing and the paths described in the document.
 
@@ -16,7 +16,6 @@ Routing is configured by passing a OpenAPI document stream:
 
          var stream = typeof(WebApiConfig).Assembly
                .GetManifestResourceStream("SampleApi.openapi.json");
-
             config.Routes.Add("OpenAPIRouter", new OpenApiRouter.OpenApiRouter(stream));
 
 and the Open API paths can be bound to Controller classes using the x-controller property:
