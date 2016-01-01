@@ -11,12 +11,12 @@ This project was inspired by the ideas of https://github.com/swagger-api/swagger
 
 Current status of this project is just a proof of concept.
 
-Routing is configured by passing a OpenAPI document stream:
+Routing is configured by using a OpenAPI document stream create an OpenApiRouter instance which is then configured as the main router:
 
 
          var stream = typeof(WebApiConfig).Assembly
                .GetManifestResourceStream("SampleApi.openapi.json");
-            config.Routes.Add("OpenAPIRouter", new OpenApiRouter.OpenApiRouter(stream));
+            config.Routes.Add("default", new OpenApiRouter.OpenApiRouter(stream));
 
 and the Open API paths can be bound to Controller classes using the x-controller property:
 
