@@ -7,8 +7,8 @@
     <ProjectGuid>{A353C582-6E06-4B8C-9B71-4B3284964DED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SwaggerRouter</RootNamespace>
-    <AssemblyName>SwaggerRouter</AssemblyName>
+    <RootNamespace>OpenApiRouter</RootNamespace>
+    <AssemblyName>OpenApiRouter</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -54,15 +54,19 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tavis.UriTemplates, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Tavis.UriTemplates.0.6.6-beta4\lib\Net45\Tavis.UriTemplates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Parser\Context.cs" />
     <Compile Include="Parser\Vocabulary.cs" />
-    <Compile Include="Parser\SwaggerDocument.cs" />
+    <Compile Include="Parser\OpenApiDocument.cs" />
     <Compile Include="Parser\JsonStreamingParser.cs" />
-    <Compile Include="SwaggerRouter.cs" />
+    <Compile Include="OpenApiRouter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Parser\SwaggerVocab.cs" />
+    <Compile Include="Parser\OpenApiVocab.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

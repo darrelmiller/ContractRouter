@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwaggerRouter", "src\SwaggerRouter\SwaggerRouter.csproj", "{A353C582-6E06-4B8C-9B71-4B3284964DED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenApiRouter", "src\SwaggerRouter\OpenApiRouter.csproj", "{A353C582-6E06-4B8C-9B71-4B3284964DED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApi", "Test\SampleApi\SampleApi.csproj", "{769CE5DB-9991-47D6-B8B4-3F5B33BE664E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwaggerRouterTests", "test\SwaggerRouterTests\SwaggerRouterTests.csproj", "{A3D75D4A-3229-4387-8D2B-D0E2E7598191}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenApiRouterTests", "test\SwaggerRouterTests\OpenApiRouterTests.csproj", "{A3D75D4A-3229-4387-8D2B-D0E2E7598191}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8519E00B-3A02-4FBF-8B7F-EB1B935E1DF9}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

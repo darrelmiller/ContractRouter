@@ -5,13 +5,9 @@
     "description": "",
     "version": "1.0"
   },
-  "host": "api.example.org",
-  "basePath": "",
-  "schemes": [
-    "http"
-  ],
   "paths": {
     "/": {
+      "x-controller": "home",
       "get": {
         "description": "Get home discovery doc",
         "operationId": "home",
@@ -19,9 +15,18 @@
       }
     },
     "/resource": {
+      "x-controller": "resource",
       "get": {
         "description": "Simple single resource",
         "operationId": "resource",
+        "responses": { }
+      }
+    },
+    "/resource/{id}": {
+      "x-controller": "resourceclass",
+      "get": {
+        "description": "class of resources",
+        "operationId": "resourceclass",
         "responses": { }
       }
     }

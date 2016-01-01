@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
 
-namespace SwaggerRouter
+namespace OpenApiRouter
 {
-    public static class SwaggerVocab
+    public static class OpenApiVocab
     {
 
         public static Vocabulary Create()
         {
             var vocab = new Vocabulary();
-            vocab.AddTermHandler<SwaggerDocument, string>("swagger", (s, o) =>
+            vocab.AddTermHandler<OpenApiDocument, string>("swagger", (s, o) =>
             {
                 s.Version = o;
             });
-            vocab.AddTermHandler<SwaggerDocument, string>("schemes", (s, o) =>
+            vocab.AddTermHandler<OpenApiDocument, string>("schemes", (s, o) =>
             {
                 if (s.Schemes == null)
                 {
@@ -24,7 +24,7 @@ namespace SwaggerRouter
 
             vocab.AddTermHandler("info", (c, o) =>
             {
-                var sdoc = (SwaggerDocument)c.Subject;
+                var sdoc = (OpenApiDocument)c.Subject;
                 sdoc.Info = new Info();
                 return new Context() { Subject = sdoc.Info, Term = "info" };
             });
@@ -36,7 +36,7 @@ namespace SwaggerRouter
 
             vocab.AddDefaultTermHandler("paths", (s, o) =>
             {
-                var sdoc = (SwaggerDocument)s.Subject;
+                var sdoc = (OpenApiDocument)s.Subject;
                 var path = sdoc.AddPath((string)o);
                 return new Context() { Subject = path, Term = "_path" };
             });
@@ -61,6 +61,7 @@ namespace SwaggerRouter
             vocab.AddSimpleStringTermHandler("description", "Description");
             vocab.AddSimpleStringTermHandler("title", "Title");
             vocab.AddSimpleStringTermHandler("operationId", "Id");
+            vocab.AddSimpleStringTermHandler("x-controller", "XController");
             return vocab;
         }
     }

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SwaggerRouter
+namespace OpenApiRouter
 {
     
 
-    public class SwaggerDocument 
+    public class OpenApiDocument 
     {
         public string Version { get; set; }
         public Dictionary<string,Path> Paths { get; set; }
@@ -17,7 +17,7 @@ namespace SwaggerRouter
 
         public Info Info { get; set; }
 
-        public SwaggerDocument()
+        public OpenApiDocument()
         {
             Paths = new Dictionary<string, Path>();
         }
@@ -66,6 +66,7 @@ namespace SwaggerRouter
             Operations = new Dictionary<string, Operation>();
         }
         public Dictionary<string, Operation> Operations {get;set;}
+        public string XController { get; set; }
 
         public Operation AddOperation(string method,string id, Action<Operation> configure = null)
         {

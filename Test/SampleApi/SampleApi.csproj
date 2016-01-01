@@ -88,7 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <EmbeddedResource Include="swagger.json" />
+    <EmbeddedResource Include="openapi.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -101,9 +101,9 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\SwaggerRouter\SwaggerRouter.csproj">
+    <ProjectReference Include="..\..\src\SwaggerRouter\OpenApiRouter.csproj">
       <Project>{a353c582-6e06-4b8c-9b71-4b3284964ded}</Project>
-      <Name>SwaggerRouter</Name>
+      <Name>OpenApiRouter</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,11 +1,11 @@
 using Newtonsoft.Json.Linq;
-using SwaggerRouter;
+using OpenApiRouter;
 using System.Collections.Generic;
 using System.IO;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace SwaggerRouterTests
+namespace OpenApiRouterTests
 {
     public static class JObjectExtensions
     {
@@ -33,10 +33,10 @@ namespace SwaggerRouterTests
         }
     }
 
-    public class SwaggerParsingTests
+    public class ParsingTests
     {
         private ITestOutputHelper _Output;
-        public SwaggerParsingTests(ITestOutputHelper output)
+        public ParsingTests(ITestOutputHelper output)
         {
             _Output = output;
         }
@@ -55,8 +55,8 @@ namespace SwaggerRouterTests
                                                         ))
                                       );
 
-            var doc = new SwaggerDocument();
-            JsonStreamingParser.ParseStream(jObject.ToMemoryStream(), doc,SwaggerVocab.Create());
+            var doc = new OpenApiDocument();
+            JsonStreamingParser.ParseStream(jObject.ToMemoryStream(), doc,OpenApiVocab.Create());
 
         }
 
@@ -64,7 +64,7 @@ namespace SwaggerRouterTests
         [Fact]
         public void ParseSwaggerPaths()
         {
-            var swaggerDoc = new SwaggerDocument();
+            var swaggerDoc = new OpenApiDocument();
             swaggerDoc.AddPath("foo", p => {
                 p.AddOperation("get", "fooget");
             });
@@ -83,8 +83,8 @@ namespace SwaggerRouterTests
 
             _Output.WriteLine(swaggerstring);
 
-            var newDoc = new SwaggerDocument();
-            JsonStreamingParser.ParseStream(swaggerstring.ToMemoryStream(), newDoc,SwaggerVocab.Create());
+            var newDoc = new OpenApiDocument();
+            JsonStreamingParser.ParseStream(swaggerstring.ToMemoryStream(), newDoc,OpenApiVocab.Create());
 
         }
 
@@ -93,9 +93,9 @@ namespace SwaggerRouterTests
         public void ParseEmbeddedSwagger()
         {
 
-           var stream = typeof(SwaggerParsingTests).Assembly.GetManifestResourceStream("SwaggerRouterTests.forecast.io.swagger.json");
+           var stream = typeof(ParsingTests).Assembly.GetManifestResourceStream("OpenApiRouterTests.forecast.io.swagger.json");
 
-            JsonStreamingParser.ParseStream(stream, new SwaggerDocument(),SwaggerVocab.Create());
+            JsonStreamingParser.ParseStream(stream, new OpenApiDocument(),OpenApiVocab.Create());
 
         }
 

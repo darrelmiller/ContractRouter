@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
-using SwaggerRouter;
+using OpenApiRouter;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,35 +9,8 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace SwaggerRouterTests
+namespace OpenApiRouterTests
 {
-    public class ConsoleLogger : IObserver<KeyValuePair<string,object>>
-    {
-        readonly ITestOutputHelper output;
-
-        public ConsoleLogger(ITestOutputHelper output)
-        {
-            this.output = output;
-        }
-
-        public void OnCompleted()
-        {
-            
-        }
-
-        public void OnError(Exception error)
-        {
-            
-        }
-
-        public void OnNext(KeyValuePair<string, object> value)
-        {
-            
-            this.output.WriteLine($"{value.Key} {value.Value}");
-            
-        }
-    }
-
     public class RebootParseTests
     {
         readonly ITestOutputHelper output;
@@ -109,12 +82,12 @@ namespace SwaggerRouterTests
             JsonStreamingParser.DiagSource = listener;
             listener.Subscribe(new ConsoleLogger(this.output));
 
-            Vocabulary vocab = SwaggerVocab.Create();
+            Vocabulary vocab = OpenApiVocab.Create();
 
-            var stream = typeof(SwaggerParsingTests).Assembly
-                .GetManifestResourceStream("SwaggerRouterTests.forecast.io.swagger.json");
+            var stream = typeof(ParsingTests).Assembly
+                .GetManifestResourceStream("OpenApiRouterTests.forecast.io.swagger.json");
 
-            var swaggerDoc = new SwaggerDocument();
+            var swaggerDoc = new OpenApiDocument();
 
             JsonStreamingParser.ParseStream(stream, swaggerDoc, vocab);
 

@@ -1,21 +1,29 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http.Routing;
+using Tavis.UriTemplates;
 
-namespace SwaggerRouter
+namespace OpenApiRouter
 {
-    public class SwaggerRouter : IHttpRoute
+    public class OpenApiRouter : IHttpRoute
     {
-        private SwaggerDocument swaggerDoc;
-        public SwaggerRouter(Stream swaggerStream)
+        private OpenApiDocument _OpenApiDoc;
+        private UriTemplateTable _UriTemplateTable;
+
+        public OpenApiRouter(Stream swaggerStream)
         {
-            swaggerDoc = new SwaggerDocument();
-            JsonStreamingParser.ParseStream(swaggerStream, swaggerDoc, SwaggerVocab.Create());
+            _OpenApiDoc = new OpenApiDocument();
+            JsonStreamingParser.ParseStream(swaggerStream, _OpenApiDoc, OpenApiVocab.Create());
+
+            _UriTemplateTable = new UriTemplateTable();
+            foreach(var path in _OpenApiDoc.Paths)
+            {
+                if (!string.IsNullOrWhiteSpace(path.Value.XController))
+                {
+                    _UriTemplateTable.Add(path.Value.XController, new UriTemplate(path.Key));
+                }
+            }
         }
         public IDictionary<string, object> Constraints
         {
@@ -36,14 +44,18 @@ namespace SwaggerRouter
         {
             var routeData = new HttpRouteData(this);
 
-            Path path = null;
-            var requestPath = request.RequestUri.GetComponents(UriComponents.Path, UriFormat.Unescaped);
-            if (!swaggerDoc.Paths.TryGetValue("/"+requestPath, out path)) {
+            var match = _UriTemplateTable.Match(new Uri(request.RequestUri.PathAndQuery, UriKind.Relative));
+
+            
+            if (match == null) {
                 return routeData;
             }
             
-            routeData.Values.Add("controller", path.Operations[request.Method.ToString().ToLower()].Id);
-
+            routeData.Values.Add("controller", match.Key);
+            foreach(var p in match.Parameters )
+            {
+                routeData.Values.Add(p.Key, p.Value);
+            }
             return routeData;
         }
 
