@@ -1,11 +1,12 @@
 using Newtonsoft.Json.Linq;
-using OpenApiRouter;
+using ContractRouter;
 using System.Collections.Generic;
 using System.IO;
 using Xunit;
 using Xunit.Abstractions;
+using Hapikit;
 
-namespace OpenApiRouterTests
+namespace ContractRouterTests
 {
     public static class JObjectExtensions
     {
@@ -93,7 +94,7 @@ namespace OpenApiRouterTests
         public void ParseEmbeddedSwagger()
         {
 
-           var stream = typeof(ParsingTests).Assembly.GetManifestResourceStream("OpenApiRouterTests.forecast.io.swagger.json");
+           var stream = typeof(ParsingTests).Assembly.GetManifestResourceStream(typeof(ParsingTests),"forecast.io.swagger.json");
 
             JsonStreamingParser.ParseStream(stream, new OpenApiDocument(),OpenApiVocab.Create());
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Http;
-using OpenApiRouter;
+using ContractRouter;
 namespace SampleApi
 {
     public static class WebApiConfig
@@ -15,7 +15,7 @@ namespace SampleApi
             var stream = typeof(WebApiConfig).Assembly
                .GetManifestResourceStream("SampleApi.openapi.json");
 
-            config.Routes.Add("default", new OpenApiRouter.OpenApiRouter(stream));
+            config.Routes.Add("default", new ContractRouter.ContractRouter(stream));
             
         }
     }

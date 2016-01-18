@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
-using OpenApiRouter;
+using ContractRouter;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,8 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
+using Hapikit;
+using ContractRouterTests;
+using OpenApiRouterTests;
 
-namespace OpenApiRouterTests
+namespace ContractRouterTests
 {
     public class RebootParseTests
     {
@@ -85,7 +88,7 @@ namespace OpenApiRouterTests
             Vocabulary vocab = OpenApiVocab.Create();
 
             var stream = typeof(ParsingTests).Assembly
-                .GetManifestResourceStream("OpenApiRouterTests.forecast.io.swagger.json");
+                .GetManifestResourceStream(typeof(ParsingTests),"forecast.io.swagger.json");
 
             var swaggerDoc = new OpenApiDocument();
 

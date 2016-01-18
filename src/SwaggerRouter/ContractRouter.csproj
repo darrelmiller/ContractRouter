@@ -7,8 +7,8 @@
     <ProjectGuid>{A353C582-6E06-4B8C-9B71-4B3284964DED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenApiRouter</RootNamespace>
-    <AssemblyName>OpenApiRouter</AssemblyName>
+    <RootNamespace>ContractRouter</RootNamespace>
+    <AssemblyName>ContractRouter</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Hapikit.net, Version=0.8.0.36748, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Hapikit.net.0.1.0-beta2\lib\portable-net45+sl5+wp8+win8+wpa81+MonoTouch1+MonoAndroid1\Hapikit.net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,15 +64,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser\Context.cs" />
-    <Compile Include="Parser\Vocabulary.cs" />
-    <Compile Include="Parser\OpenApiDocument.cs" />
-    <Compile Include="Parser\JsonStreamingParser.cs" />
-    <Compile Include="OpenApiRouter.cs" />
+    <Compile Include="ContractRouter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Parser\OpenApiVocab.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

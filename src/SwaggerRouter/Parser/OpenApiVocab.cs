@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OpenApiRouter
+namespace ContractRouter
 {
     public static class OpenApiVocab
     {

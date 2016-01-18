@@ -1,23 +1,27 @@
-﻿using System;
+﻿using Hapikit;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Http.Routing;
 using Tavis.UriTemplates;
 
-namespace OpenApiRouter
+namespace ContractRouter
 {
-    public class OpenApiRouter : IHttpRoute
+    public class ContractRouter : IHttpRoute
     {
-        private OpenApiDocument _OpenApiDoc;
         private UriTemplateTable _UriTemplateTable;
 
-        public OpenApiRouter(Stream swaggerStream)
-        {
-            _OpenApiDoc = new OpenApiDocument();
-            JsonStreamingParser.ParseStream(swaggerStream, _OpenApiDoc, OpenApiVocab.Create());
+        public ContractRouter(Stream contractStream)
+        { 
+            // By default, assume it is an OpenAPI contract
+            // We can add another ctor that has a media type parameter to support
+            // other contracts.
+
+            var openApiDoc = new OpenApiDocument();
+            JsonStreamingParser.ParseStream(contractStream, openApiDoc, OpenApiVocab.Create());
 
             _UriTemplateTable = new UriTemplateTable();
-            foreach(var path in _OpenApiDoc.Paths)
+            foreach(var path in openApiDoc.Paths)
             {
                 if (!string.IsNullOrWhiteSpace(path.Value.XController))
                 {

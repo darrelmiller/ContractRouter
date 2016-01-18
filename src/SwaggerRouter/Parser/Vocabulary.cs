@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace OpenApiRouter
+namespace ContractRouter
 {
     public class Vocabulary : Dictionary<string, Func<Context, object, Context>>
     {
