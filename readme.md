@@ -1,11 +1,10 @@
-#Open API Router
+#Contract Router
 
-Existing efforts to use the Open API format (fka Swagger) in ASP.NET Web API used the library Swashbuckle to generate a Swagger document based on the information made available via the ApiExplorer. Unfortunately due to the various routing mechanisms available in ASP.NET Web API the meta data in API Explorer does not always accurately represent the available resources.  Also, the opinions of the Open API specification prevent certain resource URLs from being accurately described.
+This library provides an alternative routing mechanism for ASP.NET Web API.  The routes are created based on a API description contract.  Currently, Open API is the only supported format but the library is designed to be able to support alternative API Description formats like API Blueprint, WADL, RAML, RADL, etc.
 
-This library takes a different approach to using the Open API format. The API description document becomes a primary artifact of the implementation and is edited to describe the API.  A new vendor extension property `x-controller` can be used to identify which Web API controllers will be used to handle requests.  A new routing mechanism is provided to map incoming requests to controllers based on this augmented Open API description document.
+This library is intended to support the notion of "contract first" API design.  The idea behind contract first is that you create a contract that describes the API before creating the implementation and ensure that the API only supports what is defined in the API.  This approach makes it easier to track where the client/server coupling exists because it is defined in the contract.  
 
-The benefit of this approach is that Open API document is always an accurate description of the API.  There is never a mismatch between the Web API routing and the paths described in the document.
-
+One of the advantages of this approach over alternative approaches that infer a contract from the implementation is that it is easy to create resources in ASP.NET Web API that cannot be described by some API Description languages because it does not fit with the opinions of that description language. 
 
 This project was inspired by the ideas of https://github.com/swagger-api/swagger-inflector
 
