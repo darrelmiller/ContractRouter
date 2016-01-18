@@ -1,0 +1,28 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="default">
+  <PropertyGroup>
+    <Project>ContractRouter</Project>
+
+    <BaseDir>$(MSBuildProjectDirectory)\..</BaseDir>
+    <Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
+    <ArtifactsDir>$(BaseDir)\artifacts</ArtifactsDir>
+    <BuildDir>$(BaseDir)\build</BuildDir>
+    <PackageDir>$(BuildDir)\Packages</PackageDir>
+    <ProjectFile>$(BaseDir)\src\$(Project)\$(Project).csproj</ProjectFile>
+  	<OutputDir>$(BaseDir)\src\$(Project)\bin\$(Configuration)</OutputDir>
+	  <SolutionDir>$(BaseDir)</SolutionDir>   <!--Needed for import of nuget targets in csproj file fails-->
+  </PropertyGroup>
+
+
+  <Target Name="default" DependsOnTargets="Compile; Package" />
+
+  <Target Name="Compile">
+   <MSBuild Projects="$(BaseDir)\src\$(Project)\$(Project).csproj" 
+              Properties="Configuration=$(Configuration);SolutionDir=$(SolutionDir);OutputPath=$(ArtifactsDir)\$(Project)\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10"  />
+
+  </Target>
+
+  <Target Name="Package">
+    <Exec WorkingDirectory="$(BuildDir)"
+          Command="nuget.exe pack $(BuildDir)\$(Project).nuspec -OutputDirectory $(ArtifactsDir) " />
+  </Target>
+</Project>
