@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>ContractRouter</id>
-        <version>0.1.0-alpha</version>
+        <version>0.1.1-alpha</version>
         <authors>Darrel Miller</authors>
         <owners>Darrel Miller</owners>
         <projectUrl>https://github.com/darrelmiller/ContractRouter</projectUrl>
