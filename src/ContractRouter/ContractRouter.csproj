@@ -59,7 +59,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Tavis.UriTemplates, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Tavis.UriTemplates.0.6.6-beta4\lib\Net45\Tavis.UriTemplates.dll</HintPath>
+      <HintPath>..\..\packages\Tavis.UriTemplates.0.6.6-beta5\lib\Net45\Tavis.UriTemplates.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

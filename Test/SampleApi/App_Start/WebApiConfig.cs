@@ -15,7 +15,7 @@ namespace SampleApi
             var stream = typeof(WebApiConfig).Assembly
                .GetManifestResourceStream("SampleApi.openapi.json");
 
-            config.Routes.Add("default", new ContractRouter.ContractRouter(stream));
+            config.AddContractRouter(stream);
             
         }
     }

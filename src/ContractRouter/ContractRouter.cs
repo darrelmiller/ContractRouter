@@ -2,11 +2,32 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Web.Http;
 using System.Web.Http.Routing;
 using Tavis.UriTemplates;
 
 namespace ContractRouter
 {
+    public static class ControllerExtensions
+    {
+        public static void AddContractRouter(this HttpConfiguration configuration, Stream contract)
+        {
+            configuration.Routes.Add("default", new ContractRouter(contract));
+        }
+        public static Uri GetContractUrl<T>(this ApiController controller,IDictionary<string,object> parameters, string routename = "default") where T : ApiController
+        {
+            // TODO: Look for Forwarded header to override Request URI
+            // TODO: Use host from OpenApi document?
+
+            var route = controller.Configuration.Routes[routename];
+
+            string controllerPrefix = typeof(T).Name.ToLower().Replace("controller", "");
+            parameters.Add("controller", controllerPrefix);
+            var vpd1 = route.GetVirtualPath(controller.Request, parameters);
+
+            return new Uri(controller.Request.RequestUri, vpd1.VirtualPath);
+        }
+    }
     public class ContractRouter : IHttpRoute
     {
         private UriTemplateTable _UriTemplateTable;
@@ -25,7 +46,7 @@ namespace ContractRouter
             {
                 if (!string.IsNullOrWhiteSpace(path.Value.XController))
                 {
-                    _UriTemplateTable.Add(path.Value.XController, new UriTemplate(path.Key));
+                    _UriTemplateTable.Add(path.Value.XController.ToLowerInvariant(), new UriTemplate(path.Key));
                 }
             }
         }
@@ -65,7 +86,20 @@ namespace ContractRouter
 
         public IHttpVirtualPathData GetVirtualPath(System.Net.Http.HttpRequestMessage request, IDictionary<string, object> values)
         {
-            return null;
+            if (values.ContainsKey("controller"))
+            {
+                var key = (string)values["controller"];
+                var template = _UriTemplateTable[key];
+                template.AddParameters(values);
+                return new VirtualPathData()
+                {
+                    Route = this,
+                    VirtualPath = template.Resolve()
+                };
+            } else
+            {
+                return null;
+            }
         }
 
         public System.Net.Http.HttpMessageHandler Handler
@@ -77,6 +111,18 @@ namespace ContractRouter
         {
             get;
             set;
+        }
+    }
+    public class VirtualPathData : IHttpVirtualPathData
+    {
+        public IHttpRoute Route
+        {
+            get; set;
+        }
+
+        public string VirtualPath
+        {
+            get; set;
         }
     }
 }
